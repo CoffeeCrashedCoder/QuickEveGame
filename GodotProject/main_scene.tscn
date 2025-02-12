@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dip4s6hokay4g"]
+
+[ext_resource type="PackedScene" uid="uid://bknoc2qggterj" path="res://Assets/Furniture/Chest/Chest.tscn" id="1_22m1e"]
+[ext_resource type="PackedScene" uid="uid://dtbg8kmmnrpq4" path="res://Assets/Buildings/Tavern/_tavern.tscn" id="1_mfi7i"]
+[ext_resource type="Shader" path="res://Assets/Shaders/ground_shader.gdshader" id="3_roocy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_idytk"]
+render_priority = 0
+shader = ExtResource("3_roocy")
+shader_parameter/color = Color(0.166074, 0.495531, 0.337077, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h5w2o"]
+lightmap_size_hint = Vector2i(12, 12)
+material = SubResource("ShaderMaterial_idytk")
+
+[node name="MainScene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.270598, 0.653282, 0, 0.92388, 0.382683, -0.707107, -0.270598, 0.653282, 2.16, 2.8, 2.5)
+current = true
+fov = 37.8493
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 1, 1, 1)
+shadow_enabled = true
+
+[node name="_tavern" parent="." instance=ExtResource("1_mfi7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14558, 1.19209e-07, -1.40235)
+
+[node name="Chest" parent="." instance=ExtResource("1_22m1e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.4, 0, -0.3)
+
+[node name="GroundMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, -1.2, 0, -1.2)
+mesh = SubResource("PlaneMesh_h5w2o")
